@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulator Aesthetic</title>
+
+<!-- 🌸 Font aesthetic -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: #d7ccc8;
+        background-image: radial-gradient(#4e342e 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+
+    .calculator {
+        width: 90%;
+        max-width: 360px;
+        padding: 20px;
+        border-radius: 25px;
+        background: #5d4037;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+
+    /* 🌸 Judul aesthetic + animasi */
+    .title {
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+        font-size: 26px;
+        color: #fff8e1;
+        margin-bottom: 10px;
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from {
+            text-shadow: 0 0 5px #fff8e1;
+        }
+        to {
+            text-shadow: 0 0 20px #fff8e1, 0 0 30px #a1887f;
+        }
+    }
+
+    .display {
+        background: #3e2723;
+        color: #fff8e1;
+        font-size: clamp(32px, 8vw, 48px);
+        text-align: right;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        overflow-x: auto;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+
+    button {
+        height: 65px;
+        border: none;
+        border-radius: 15px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+
+        background: #6d4c41;
+        color: #fff8e1;
+
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    button:hover {
+        background: #8d6e63;
+    }
+
+    button:active {
+        transform: scale(0.9);
+    }
+
+    .operator {
+        background: #8d6e63;
+    }
+
+    .equal {
+        background: #3e2723;
+    }
+
+    .gray {
+        background: #a1887f;
+        color: #fff;
+    }
+
+    .zero {
+        grid-column: span 2;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+    <div class="title">Calculator ✨</div>
+
+    <div id="display" class="display">0</div>
+
+    <div class="buttons">
+        <button class="gray" onclick="clearDisplay()">C</button>
+        <button class="gray" onclick="deleteLast()">⌫</button>
+        <button class="gray" onclick="append('%')">%</button>
+        <button class="operator" onclick="append('/')">÷</button>
+
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button class="operator" onclick="append('*')">×</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button class="operator" onclick="append('-')">−</button>
+
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button class="operator" onclick="append('+')">+</button>
+
+        <button class="zero" onclick="append('0')">0</button>
+        <button onclick="append('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    let display = document.getElementById("display");
+
+    function append(value) {
+        if (display.innerText === "0") {
+            display.innerText = value;
+        } else {
+            display.innerText += value;
+        }
+    }
+
+    function clearDisplay() {
+        display.innerText = "0";
+    }
+
+    function deleteLast() {
+        let text = display.innerText;
+        display.innerText = text.length === 1 ? "0" : text.slice(0, -1);
+    }
+
+    function calculate() {
+        try {
+            display.innerText = eval(display.innerText);
+        } catch {
+            display.innerText = "Error";
+        }
+    }
+</script>
+
+</body>
+</html>
